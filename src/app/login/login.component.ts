@@ -11,6 +11,6 @@ export class LoginComponent {
 
   login() {
     const provider = new GoogleAuthProvider();
-    this.afAuth.signInWithRedirect(provider);
+    this.afAuth.signInWithPopup(provider);
   }
 }
