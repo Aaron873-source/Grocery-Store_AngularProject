@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '@firebase/auth-types';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'bs-navbar',
@@ -12,8 +12,10 @@ export class BsNavbarComponent implements OnDestroy {
   user: User | null = null;
   private authSubscription: Subscription;
 
-  constructor(private afAuth: AngularFireAuth) {
-    this.authSubscription = this.afAuth.authState.subscribe((user) => {
+  constructor(private authService: AuthService) {
+    // Change to AuthService
+    this.authSubscription = this.authService.user$.subscribe((user) => {
+      // Change to user$ observable
       this.user = user;
       console.log('Auth State Changed:', user);
     });
@@ -26,6 +28,6 @@ export class BsNavbarComponent implements OnDestroy {
   }
 
   logout() {
-    this.afAuth.signOut();
+    this.authService.logout();
   }
 }

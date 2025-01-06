@@ -19,6 +19,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { AuthService } from './services/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,8 +42,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
   ],
-  providers: [
-  ],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
