@@ -3,6 +3,7 @@ export const environment = {
   firebase: {
     apiKey: 'AIzaSyCRKbhti0FEXvIIec4QapFiOnfwsME0-CM',
     authDomain: 'grocerystore-b4000.firebaseapp.com',
+    databaseURL: 'https://grocerystore-b4000-default-rtdb.firebaseio.com', 
     projectId: 'grocerystore-b4000',
     storageBucket: 'grocerystore-b4000.firebasestorage.app',
     messagingSenderId: '583100030595',
