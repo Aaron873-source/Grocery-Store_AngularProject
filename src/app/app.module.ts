@@ -22,6 +22,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { UserService } from './services/user.service';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,7 @@ import { UserService } from './services/user.service';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
   ],
-  providers: [AuthService, AuthGuardService, UserService],
+  providers: [AuthService, AuthGuardService, UserService,AdminAuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

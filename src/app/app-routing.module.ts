@@ -10,6 +10,7 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 import { ProductsComponent } from './products/products.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 const routes: Routes = [
   //Adding routes for the Anonymous users below
@@ -22,8 +23,8 @@ const routes: Routes = [
   { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
   { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService] },
   //Now Adding routes for the Admins below
-  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService] },
-  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
 ];
 
 @NgModule({
