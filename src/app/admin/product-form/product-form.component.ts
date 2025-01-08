@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../../models/product';
 import { CategoryService } from '../../services/category.service';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -13,7 +14,8 @@ export class ProductFormComponent {
   categories$: Observable<any[]>;
 
   constructor(
-    categoryService: CategoryService,
+    private router : Router,
+    private categoryService: CategoryService,
     private productService: ProductService
   ) {
     this.categories$ = categoryService.getCategories();
@@ -21,5 +23,7 @@ export class ProductFormComponent {
 
   save(product: Product) {
     this.productService.create(product);
+    //After saving the product, redirecting user to the products page
+    this.router.navigate(['/admin/products']);
   }
 }
