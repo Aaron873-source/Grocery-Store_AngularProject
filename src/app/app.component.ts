@@ -24,7 +24,10 @@ export class AppComponent {
           .then(() => {
             // Redirect the user to the returnUrl only after successful save
             let returnUrl = localStorage.getItem('returnUrl');
-            router.navigateByUrl(returnUrl || '/');
+            if (returnUrl) {
+              localStorage.removeItem('returnUrl');
+              router.navigateByUrl(returnUrl);
+            }
           })
           .catch((error) => console.error('Error in app component:', error));
       }
