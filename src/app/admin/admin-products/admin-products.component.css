@@ -1,0 +1,20 @@
+.mat-mdc-header-cell {
+  font-weight: bold;
+  color: black;
+  font-size: 16px;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+.mat-mdc-cell {
+  font-size: 15px;
+}
+
+/* Pagination text size */
+.mat-mdc-paginator {
+  font-size: 15px;
+}
+
+

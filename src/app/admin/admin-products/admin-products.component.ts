@@ -1,4 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../../models/product';
@@ -9,10 +12,13 @@ import { ProductService } from '../../services/product.service';
   templateUrl: './admin-products.component.html',
   styleUrl: './admin-products.component.css',
 })
-export class AdminProductsComponent implements OnDestroy {
-  products: any[] = [];
-  filteredProducts: any[] = [];
+export class AdminProductsComponent implements OnInit, OnDestroy {
+  displayedColumns: string[] = ['position', 'title', 'price', 'actions'];
+  dataSource!: MatTableDataSource<any>;
   subscription: Subscription;
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private productService: ProductService) {
     this.subscription = this.productService
@@ -27,19 +33,27 @@ export class AdminProductsComponent implements OnDestroy {
         )
       )
       .subscribe((products) => {
-        this.filteredProducts = this.products = products;
+        this.dataSource = new MatTableDataSource(products);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       });
   }
 
+  ngOnInit() {}
+
   filter(query: string) {
-    this.filteredProducts = query
-      ? this.products.filter((p) =>
-          p.title.toLowerCase().includes(query.toLowerCase())
-        )
-      : this.products;
+    this.dataSource.filter = query.trim().toLowerCase();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  ngAfterViewInit() {
+    // Set up paginator after view is initialized
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 }
