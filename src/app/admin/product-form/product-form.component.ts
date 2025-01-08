@@ -19,6 +19,7 @@ export class ProductFormComponent implements OnDestroy {
     imageUrl: '',
   };
   private subscription?: Subscription;
+  id;
 
   constructor(
     private router: Router,
@@ -27,22 +28,27 @@ export class ProductFormComponent implements OnDestroy {
     private productService: ProductService
   ) {
     this.categories$ = categoryService.getCategories();
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id)
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id)
       this.subscription = this.productService
-        .get(id)
+        .get(this.id)
         .valueChanges()
         .subscribe((p) => (this.product = p as Product));
   }
 
   save(product: Product) {
-    let id = this.route.snapshot.paramMap.get('id');
-
-    if (id) this.productService.update(id, product);
+    if (this.id) this.productService.update(this.id, product);
     else this.productService.create(product);
 
     //After saving the product, redirecting user to the products page
     this.router.navigate(['/admin/products']);
+  }
+
+  delete() {
+    if (confirm('Are you sure you want to delete this product?')) {
+      if (this.id) this.productService.delete(this.id);
+      this.router.navigate(['/admin/products']);
+    }
   }
 
   ngOnDestroy() {
