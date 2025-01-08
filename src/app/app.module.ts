@@ -25,6 +25,8 @@ import { UserService } from './services/user.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './services/category.service';
+import { FormsModule } from '@angular/forms';
+import { ProductService } from './services/product.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,8 +49,9 @@ import { CategoryService } from './services/category.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    FormsModule,
   ],
-  providers: [AuthService, AuthGuardService, UserService,AdminAuthGuardService,CategoryService],
+  providers: [AuthService, AuthGuardService, UserService,AdminAuthGuardService,CategoryService,ProductService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

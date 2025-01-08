@@ -1,18 +1,18 @@
-<form>
+<form #f="ngForm" (ngSubmit)="save(f.value)">
 <div class="form-group">
     <label for="title">Title</label>
-    <input type="text" class="form-control" id="title">
+    <input ngModel name="title" type="text" class="form-control" id="title">
 </div>
 <div class="form-group">
     <label for="price">Price</label>
     <div class="input-group ">
         <span class="input-group-text">$</span>
-        <input type="number" class="form-control" id="price">
+        <input ngModel name="price" type="number" class="form-control" id="price">
     </div>
 </div>
 <div class="form-group">
     <label for="category">Category</label>
-    <select class="form-control" id="category">
+    <select ngModel name="category" class="form-control" id="category">
         <option value=""></option>
        <option *ngFor="let c of categories$ | async" [value]="c.$key" >
         {{c.name}}
@@ -21,7 +21,7 @@
 </div>
 <div class="form-group">
     <label for="imageUrl">Image URL</label>
-    <input type="text" class="form-control" id="imageUrl">
+    <input ngModel name="imageUrl" type="text" class="form-control" id="imageUrl">
 </div>
 
 <button class="btn btn-primary" style="margin-top: 20px;">Save</button>
