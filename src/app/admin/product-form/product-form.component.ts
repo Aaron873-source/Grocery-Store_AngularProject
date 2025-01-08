@@ -36,7 +36,11 @@ export class ProductFormComponent implements OnDestroy {
   }
 
   save(product: Product) {
-    this.productService.create(product);
+    let id = this.route.snapshot.paramMap.get('id');
+
+    if (id) this.productService.update(id, product);
+    else this.productService.create(product);
+
     //After saving the product, redirecting user to the products page
     this.router.navigate(['/admin/products']);
   }
