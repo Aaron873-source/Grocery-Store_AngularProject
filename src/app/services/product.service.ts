@@ -11,4 +11,9 @@ export class ProductService {
   create(product: Product) {
     return this.db.list('/products').push(product);
   }
+
+
+  getAll() {
+    return this.db.list('/products');
+  }
 }
