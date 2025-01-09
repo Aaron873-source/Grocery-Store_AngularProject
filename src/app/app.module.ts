@@ -30,6 +30,7 @@ import { ProductService } from './services/product.service';
 import { UserService } from './services/user.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CustomPaginatorIntl } from './shared/custom-paginator';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CustomPaginatorIntl } from './shared/custom-paginator';
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
+    ProductFilterComponent,
   ],
   imports: [
     BrowserModule,

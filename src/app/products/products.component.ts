@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product';
-import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
 
 @Component({
@@ -12,12 +11,11 @@ import { ProductService } from '../services/product.service';
 export class ProductsComponent {
   products: Product[] = [];
   filteredProducts: Product[] = [];
-  categories$;
+  
   category: string | null = null;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private categoryService: CategoryService
   ) {
     productService
       .getAll()
@@ -33,7 +31,7 @@ export class ProductsComponent {
             : this.products;
         });
       });
-    this.categories$ = categoryService.getAll();
+    
 
   
   }
