@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Product } from '../models/product';
+import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
 
 @Component({
@@ -10,8 +11,11 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductsComponent {
   products$;
-
-  constructor(private productService: ProductService) {
+  categories$;
+  constructor(
+    private productService: ProductService,
+    private categoryService: CategoryService
+  ) {
     this.products$ = productService
       .getAll()
       .snapshotChanges()
@@ -23,5 +27,6 @@ export class ProductsComponent {
           }))
         )
       );
+    this.categories$ = categoryService.getAll();
   }
 }
