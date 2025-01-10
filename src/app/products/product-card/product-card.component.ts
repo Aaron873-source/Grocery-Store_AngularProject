@@ -13,11 +13,14 @@ export class ProductCardComponent {
   @Input('shopping-cart') shoppingCart: any = {};
   constructor(private cartService: ShoppingCartService) {}
 
-  addToCart(product: Product) {
+  addToCart() {
     //first we get the cart id from the local storage
-    this.cartService.addToCart(product);
+    this.cartService.addToCart(this.product);
   }
 
+  removeFromCart() {
+    this.cartService.removeFromCart(this.product);
+  }
 
   getQuantity() {
     if (!this.shoppingCart) return 0;

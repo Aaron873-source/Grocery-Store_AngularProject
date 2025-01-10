@@ -39,6 +39,15 @@ export class ShoppingCartService {
   }
 
   async addToCart(product: Product) {
+    this.updateItemQuantity(product, 1);
+  }
+
+  async removeFromCart(product: Product) {
+    this.updateItemQuantity(product, -1);
+  }
+
+
+  private async updateItemQuantity(product: Product, change: number) {
     const cartId = await this.getOrCreateCartId();
     if (!cartId) return;
     const item$ = this.getItem(cartId, product.$key);
@@ -47,7 +56,7 @@ export class ShoppingCartService {
       .pipe(take(1))
       .subscribe((item: any) => {
         if (item) {
-          item$.update({ quantity: (item.quantity || 0) + 1 });
+          item$.update({ quantity: (item.quantity || 0) + change });
         } else {
           item$.set({
             category: product.category,
@@ -58,5 +67,10 @@ export class ShoppingCartService {
           });
         }
       });
+
+
+    
   }
+
+
 }
