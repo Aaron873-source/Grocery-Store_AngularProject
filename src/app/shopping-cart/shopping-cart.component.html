@@ -4,6 +4,7 @@
     <p>
       You have {{ cart.totalItemsCount }} items in your shopping cart.
 
+      <br />
       <button
         *ngIf="cart.items.length"
         (click)="clearCart()"
