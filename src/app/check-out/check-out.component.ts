@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Shipping } from '../models/shipping';
 import { ShoppingCart } from '../models/shopping-cart';
+import { AuthService } from '../services/auth.service';
 import { OrderService } from '../services/order.service';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 
@@ -19,12 +21,17 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   };
   cart!: ShoppingCart;
   cartSubscription!: Subscription;
+  userId!: string;
+  userSubscription!: Subscription;
   constructor(
+    private route: Router,
+    private authService: AuthService,
     private orderService: OrderService,
     private shoppingCartService: ShoppingCartService
   ) {}
   ngOnDestroy(): void {
     this.cartSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
   async ngOnInit() {
@@ -32,10 +39,14 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     this.cartSubscription = cart$.subscribe((cart) => {
       if (cart) this.cart = cart;
     });
+    this.userSubscription = this.authService.user$.subscribe((user) => {
+      this.userId = user?.uid || '';
+    });
   }
 
-  placeOrder() {
+  async placeOrder() {
     let order = {
+      userId: this.userId,
       datePlaced: new Date().getTime(),
       shipping: this.shipping,
       items: this.cart.items.map((i) => ({
@@ -48,6 +59,8 @@ export class CheckOutComponent implements OnInit, OnDestroy {
         totalPrice: i.totalPrice,
       })),
     };
-    this.orderService.storeOrder(order);
+
+    let result = await this.orderService.storeOrder(order);
+    this.route.navigate(['/order-success', result.key]);
   }
 }
