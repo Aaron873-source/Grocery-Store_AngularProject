@@ -1,11 +1,25 @@
-.card-footer {
-    padding: 0;
+.card {
+  margin-bottom: 30px;
+  height: 100%;
 }
 
-.card {
-    margin-bottom: 30px;
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-footer {
+  padding: 0;
 }
 
 .card-footer button {
-   cursor: pointer;
+  cursor: pointer;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* For the quantity controls */
+.card-footer product-quantity .btn {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }

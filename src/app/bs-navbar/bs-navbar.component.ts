@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '@firebase/auth-types';
+import { Collapse } from 'bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { AppUser } from '../models/app-user';
 import { ShoppingCart } from '../models/shopping-cart';
@@ -33,6 +34,15 @@ export class BsNavbarComponent implements OnDestroy, OnInit {
 
     //
     this.cart$ = await this.shoppingCartService.getCart();
+
+    // Initialize Bootstrap collapse
+    document
+      .querySelectorAll('[data-bs-toggle="collapse"]')
+      .forEach((button) => {
+        new Collapse(button.nextElementSibling as HTMLElement, {
+          toggle: false,
+        });
+      });
   }
 
   ngOnDestroy() {
