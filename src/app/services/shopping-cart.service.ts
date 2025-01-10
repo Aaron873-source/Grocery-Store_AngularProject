@@ -19,10 +19,17 @@ export class ShoppingCartService {
 
   async getCart(): Promise<Observable<ShoppingCart | null>> {
     let cartId = await this.getOrCreateCartId();
+    if (!cartId) return new Observable((subscriber) => subscriber.next(null));
+
     return this.db
-      .object<ShoppingCart>(`/shopping-carts/${cartId}`)
+      .object<any>(`/shopping-carts/${cartId}`)
       .valueChanges()
-      .pipe(map((x) => (x ? new ShoppingCart(x.items) : null)));
+      .pipe(
+        map((cart) => {
+          if (!cart) return null;
+          return new ShoppingCart(cart.items || {});
+        })
+      );
   }
 
   private getItem(cartId: string, productId: string) {
