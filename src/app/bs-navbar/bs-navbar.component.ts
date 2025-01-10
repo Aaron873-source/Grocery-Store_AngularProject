@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '@firebase/auth-types';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AppUser } from '../models/app-user';
+import { ShoppingCart } from '../models/shopping-cart';
 import { AuthService } from '../services/auth.service';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 
@@ -15,7 +16,7 @@ export class BsNavbarComponent implements OnDestroy, OnInit {
   private authSubscription!: Subscription;
   appUser: AppUser | null = null;
 
-  shoppingCartItemCount: number = 0;
+  cart$!: Observable<ShoppingCart | null>;
 
   constructor(
     private authService: AuthService,
@@ -31,15 +32,7 @@ export class BsNavbarComponent implements OnDestroy, OnInit {
     });
 
     //
-    let cart$ = await this.shoppingCartService.getCart();
-    cart$.subscribe((cart) => {
-      if (cart && cart.items) {
-        this.shoppingCartItemCount = 0;
-        for (let productId in cart.items) {
-          this.shoppingCartItemCount += cart.items[productId].quantity;
-        }
-      }
-    });
+    this.cart$ = await this.shoppingCartService.getCart();
   }
 
   ngOnDestroy() {
