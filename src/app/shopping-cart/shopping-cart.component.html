@@ -1,34 +1,46 @@
-<h1>Shopping Cart</h1>
-
 <ng-container *ngIf="cart$ | async as cart">
-  <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of cart.items">
-        <td>{{ item.title }}</td>
-        <td>
-            <product-quantity [product]="item" [shopping-cart]="cart"></product-quantity>
-        </td>
-        <td>{{ item.totalPrice | currency : "USD" : "symbol" }}</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th></th>
-        <th></th>
-        <th>{{ cart.totalPrice | currency : "USD" : "symbol" }}</th>
-      </tr>
-    </tfoot>
-  </table>
-<button (click)="clearCart()" class="btn btn-danger btn-sm">Clear Shopping Cart</button>
-  
-
-
+  <div class="table-container">
+    <h1>Shopping Cart</h1>
+    <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="image-col"></th>
+          <th class="product-col">Product</th>
+          <th class="quantity-col text-center">Quantity</th>
+          <th class="price-col text-right">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cart.items">
+          <td>
+            <img [src]="item.imageUrl" class="thumbnail" [alt]="item.title" />
+          </td>
+          <td class="product-col">{{ item.title }}</td>
+          <td class="quantity-col">
+            <product-quantity
+              [product]="item"
+              [shopping-cart]="cart"
+            ></product-quantity>
+          </td>
+          <td class="price-col text-right">
+            {{ item.totalPrice | currency : "USD" : "symbol" }}
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="text-right">
+            {{ cart.totalPrice | currency : "USD" : "symbol" }}
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+    <button (click)="clearCart()" class="btn btn-danger btn-sm">
+      Clear Shopping Cart
+    </button>
+  </div>
 </ng-container>
