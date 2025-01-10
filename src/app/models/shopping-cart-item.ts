@@ -1,11 +1,13 @@
 export class ShoppingCartItem {
-  $key?: string;
+  $key: string;
   title!: string;
   imageUrl!: string;
   price!: number;
   quantity!: number;
+  category!: string;
 
   constructor(init?: Partial<ShoppingCartItem>) {
+    this.$key = init?.$key || '';
     Object.assign(this, init);
   }
 
