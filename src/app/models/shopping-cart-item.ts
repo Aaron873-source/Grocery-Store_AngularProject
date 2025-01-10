@@ -1,6 +1,6 @@
-import { Product } from "./product";
-
 export interface ShoppingCartItem {
-    product: Product;
-    quantity: number;
+  title: string;
+  imageUrl: string;
+  price: number;
+  quantity: number;
 }
