@@ -15,7 +15,8 @@ export class ShoppingCartService {
     });
   }
 
-  private getCart(cartId: string) {
+  async getCart() {
+    let cartId = await this.getOrCreateCartId();
     return this.db.object(`/shopping-carts/${cartId}`);
   }
 
@@ -23,7 +24,7 @@ export class ShoppingCartService {
     return this.db.object(`/shopping-carts/${cartId}/items/${productId}`);
   }
 
-  private async getOrCreateCartId() {
+  private async getOrCreateCartId(): Promise<string | null> {
     let cartId = localStorage.getItem('cartId');
     if (!cartId) {
       const result = await this.create();
