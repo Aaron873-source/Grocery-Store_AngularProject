@@ -3,8 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -21,22 +19,11 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private productService: ProductService) {
-    this.subscription = this.productService
-      .getAll()
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          changes.map((c) => ({
-            $key: c.payload.key,
-            ...(c.payload.val() as Product),
-          }))
-        )
-      )
-      .subscribe((products) => {
-        this.dataSource = new MatTableDataSource(products);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
+    this.subscription = this.productService.getAll().subscribe((products) => {
+      this.dataSource = new MatTableDataSource(products);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   ngOnInit() {}

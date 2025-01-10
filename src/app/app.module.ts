@@ -32,6 +32,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CustomPaginatorIntl } from './shared/custom-paginator';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
+import { ShoppingCartService } from './services/shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
     AdminAuthGuardService,
     CategoryService,
     ProductService,
-    { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl }
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
+    ShoppingCartService,
   ],
   bootstrap: [AppComponent],
 })

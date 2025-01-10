@@ -13,6 +13,7 @@ import { ProductService } from '../../services/product.service';
 export class ProductFormComponent implements OnDestroy {
   categories$: Observable<any[]>;
   product: Product = {
+    $key: '',
     title: '',
     price: 0,
     category: '',

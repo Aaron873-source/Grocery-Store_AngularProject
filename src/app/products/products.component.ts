@@ -19,9 +19,8 @@ export class ProductsComponent {
   ) {
     productService
       .getAll()
-      .valueChanges()
       .subscribe((products) => {
-        this.products = products as Product[];
+        this.products = products;
         //Below handling the query params , done to happen after the products are loaded from the service
         this.route.queryParamMap.subscribe((params) => {
           this.category = params.get('category');

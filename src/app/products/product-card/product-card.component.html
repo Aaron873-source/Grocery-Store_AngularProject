@@ -12,8 +12,8 @@
     </p>
   </div>
   <div class="card-footer">
-    <a *ngIf="showActions" href="#" class="btn btn-primary w-100"
-      >Add to Cart</a
-    >
+    <button *ngIf="showActions" class="btn btn-primary w-100"
+    (click)="addToCart(product)"
+      >Add to Cart</button>
   </div>
 </div>

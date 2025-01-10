@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { Product } from '../models/product';
+import { map } from 'rxjs/operators';
+import { Product, ProductData } from '../models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,19 @@ export class ProductService {
   }
 
   getAll() {
-    return this.db.list('/products');
+    return this.db
+      .list('/products')
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => {
+            return {
+              $key: c.payload.key!,
+              ...(c.payload.val() as ProductData),
+            };
+          })
+        )
+      );
   }
 
   get(productId: string) {
