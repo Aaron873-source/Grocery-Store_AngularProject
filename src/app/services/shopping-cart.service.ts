@@ -67,7 +67,12 @@ export class ShoppingCartService {
       .pipe(take(1))
       .subscribe((item: any) => {
         if (item) {
-          item$.update({ quantity: (item.quantity || 0) + change });
+          let quantity = (item.quantity || 0) + change;
+          if (quantity === 0) {
+            item$.remove();
+          } else {
+            item$.update({ quantity: quantity });
+          }
         } else {
           item$.set({
             category: product.category,
