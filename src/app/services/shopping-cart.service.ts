@@ -79,4 +79,10 @@ export class ShoppingCartService {
         }
       });
   }
+
+  async clearCart() {
+    const cartId = await this.getOrCreateCartId();
+    if (!cartId) return;
+    this.db.object(`/shopping-carts/${cartId}/items`).remove();
+  }
 }
