@@ -25,15 +25,12 @@ export class BsNavbarComponent implements OnDestroy, OnInit {
   ) {}
   async ngOnInit(): Promise<void> {
     this.authService.appUser$.subscribe((appUser) => (this.appUser = appUser));
-    // Change to AuthService
     this.authSubscription = this.authService.user$.subscribe((user) => {
-      // Change to user$ observable
       this.user = user;
-      console.log('Auth State Changed:', user);
     });
 
-    //
-    this.cart$ = await this.shoppingCartService.getCart();
+    // Wait for the cart to be ready before subscribing
+    await this.waitForCart();
 
     // Initialize Bootstrap collapse
     document
@@ -43,6 +40,12 @@ export class BsNavbarComponent implements OnDestroy, OnInit {
           toggle: false,
         });
       });
+  }
+
+  private async waitForCart() {
+    this.cart$ = await this.shoppingCartService.getCart();
+    // Force initial subscription
+    this.cart$.subscribe();
   }
 
   ngOnDestroy() {
