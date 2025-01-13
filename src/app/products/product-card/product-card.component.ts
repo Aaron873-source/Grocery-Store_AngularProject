@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../../models/product';
-import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { ShoppingCart } from '../../models/shopping-cart';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'product-card',
@@ -14,9 +14,14 @@ export class ProductCardComponent {
   @Input('shopping-cart') shoppingCart!: ShoppingCart;
   constructor(private cartService: ShoppingCartService) {}
 
-  addToCart() {
-    //first we get the cart id from the local storage
-    this.cartService.addToCart(this.product);
+  async addToCart() {
+    await this.cartService.addToCart(this.product);
+    // Force a cart update through the service
+    const cartObservable = await this.cartService.getCart();
+    cartObservable.subscribe((cart) => {
+      if (cart) {
+        this.shoppingCart = cart;
+      }
+    });
   }
-
 }
