@@ -2,3 +2,30 @@
 
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 @import "@fortawesome/fontawesome-free/css/all.css";
+
+:root {
+  --primary-color: #3b82f6;
+  --text-color: #1e293b;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+  margin-top: -0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .md\:col-3 {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+  .md\:col-9 {
+    flex: 0 0 auto;
+    width: 75%;
+  }
+}
+
+
+

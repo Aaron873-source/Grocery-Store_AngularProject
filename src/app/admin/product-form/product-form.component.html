@@ -80,7 +80,13 @@
         </div>
       </div>
 
-      <button class="btn btn-primary" style="margin-top: 20px">Save</button>
+      <button
+        class="btn btn-primary"
+        style="margin-top: 20px; margin-right: 10px"
+        (click)="save(f.value)"
+      >
+        Save
+      </button>
       <button
         type="button"
         class="btn btn-danger"
@@ -93,5 +99,5 @@
   </div>
   <div class="col-md-6">
     <product-card [product]="product" [show-actions]="false"></product-card>
-    </div>
   </div>
+</div>

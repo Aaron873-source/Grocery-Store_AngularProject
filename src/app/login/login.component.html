@@ -1,1 +1,20 @@
-<button (click)="login()" class="btn btn-primary">Login with Google</button>
+<div class="login-container">
+  <p-card header="Welcome to Aaron's Food-Hub" styleClass="login-card">
+    <ng-template pTemplate="header">
+      <div class="logo-container">
+        <i class="fa-solid fa-shop text-primary" style="font-size: 3rem"></i>
+      </div>
+    </ng-template>
+
+    <div class="flex flex-column align-items-center">
+      <p class="text-center mb-4">Please login in to continue shopping</p>
+
+      <button pButton (click)="login()" class="p-button-raised google-btn">
+        <span class="google-btn-content">
+          <i class="pi pi-google"></i>
+          <span>Log in with Google</span>
+        </span>
+      </button>
+    </div>
+  </p-card>
+</div>

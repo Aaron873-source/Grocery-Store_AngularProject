@@ -1,13 +1,28 @@
 .table-container {
   max-width: 1270px;
   margin: 0 auto;
+  padding: 15px;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -15px;
+  padding: 0 15px;
 }
 
 .table {
-  width: 100%;
   table-layout: fixed;
-  border-collapse: separate;
-  border-spacing: 0 8px;
+  width: 100%;
 }
 
 .thumbnail {
@@ -16,7 +31,13 @@
   border-radius: 100%;
   object-fit: cover;
   display: block;
-  margin: 8px;
+  margin: 8px auto;
+  object-position: center;
+}
+
+.image-col {
+  width: 100px;
+  padding: 8px;
 }
 
 .product-col {
@@ -25,7 +46,8 @@
 }
 
 .quantity-col {
-  width: 30%;
+  width: 35%;
+  text-align: center;
 }
 
 .price-col {
@@ -44,7 +66,95 @@
   vertical-align: middle;
 }
 
-/* Add a specific width for the image column */
-.image-col {
-  width: 120px;
+.cart-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.table tfoot tr th {
+  border-bottom: none;
+}
+
+.table tfoot {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .table {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .product-col {
+    width: 25%;
+  }
+
+  .quantity-col {
+    width: 40%;
+  }
+
+  .price-col {
+    width: 20%;
+  }
+
+  .image-col {
+    width: 60px;
+    padding: 4px;
+  }
+
+  .thumbnail {
+    height: 50px;
+    width: 50px;
+    margin: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-col {
+    width: 50px;
+    padding: 2px;
+  }
+
+  .product-col {
+    width: 20%;
+    padding-left: 5px;
+  }
+
+  .quantity-col {
+    width: 50%;
+  }
+
+  .price-col {
+    width: 15%;
+  }
+
+  .table {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .thumbnail {
+    height: 35px;
+    width: 35px;
+    margin: 2px;
+  }
+
+  .quantity-controls {
+    max-width: 120px;
+  }
+
+  .btn {
+    padding: 0.2rem 0.4rem;
+    font-size: 12px;
+  }
+
+  .cart-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-header button {
+    align-self: flex-end;
+  }
 }

@@ -1,29 +1,33 @@
-<div *ngIf="product.title" class="card">
-  <img
-    [src]="product.imageUrl"
-    class="card-img-top"
-    alt="{{ product.title }}"
-    *ngIf="product.imageUrl"
-  />
-  <div class="card-body">
-    <h5 class="card-title">{{ product.title }}</h5>
-    <p class="card-text">
-      {{ product.price | currency : "USD" : "symbol" }}
-    </p>
-  </div>
-  <div *ngIf="showActions && shoppingCart" class="card-footer">
-    <button
-      *ngIf="shoppingCart.getQuantity(product) === 0; else updateQuantity"
-      class="btn btn-primary w-100"
-      (click)="addToCart()"
-    >
-      Add to Cart
-    </button>
-    <ng-template #updateQuantity>
-      <product-quantity
-        [product]="product"
-        [shopping-cart]="shoppingCart"
-      ></product-quantity>
-    </ng-template>
-  </div>
-</div>
+<p-card *ngIf="product.title" [style]="{overflow: 'hidden' }">
+  <ng-template pTemplate="header">
+    <img
+      *ngIf="product.imageUrl"
+      [src]="product.imageUrl"
+      [alt]="product.title"
+      class="w-full"
+    />
+  </ng-template>
+  <ng-template pTemplate="title">
+    {{ product.title }}
+  </ng-template>
+  <ng-template pTemplate="subtitle">
+    {{ product.price | currency : "USD" : "symbol" }}
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="flex gap-4 mt-1" *ngIf="showActions && shoppingCart">
+      <button
+        *ngIf="shoppingCart.getQuantity(product) === 0; else updateQuantity"
+        pButton
+        label="Add to Cart"
+        icon="pi pi-shopping-cart"
+        (click)="addToCart()"
+        class="w-full"
+      ></button>
+      <ng-template #updateQuantity>
+        <product-quantity [product]="product" [shopping-cart]="shoppingCart">
+        </product-quantity>
+      </ng-template>
+    </div>
+  </ng-template>
+</p-card>

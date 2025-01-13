@@ -1,4 +1,9 @@
-.sticky-top {
-  top: 80px;
+.sticky-container {
+  position: relative;
   z-index: 1;
+}
+
+.list-group {
+  border-radius: 4px;
+  overflow: hidden;
 }

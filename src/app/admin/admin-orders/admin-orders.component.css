@@ -1,0 +1,38 @@
+.table {
+  margin-top: 20px;
+}
+
+.order-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.order-row {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 16px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  align-items: center;
+}
+
+.product-name {
+  padding-left: 8px;
+}
+
+.product-quantity {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .table {
+    font-size: 14px;
+  }
+
+  .order-row {
+    padding: 6px;
+    gap: 8px;
+    font-size: 13px;
+  }
+}

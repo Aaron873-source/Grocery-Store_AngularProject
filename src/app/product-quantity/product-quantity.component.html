@@ -1,15 +1,21 @@
-<div class="row no-gutters">
-    <div class="col-2">
- <button
-  (click)="removeFromCart()"
-  class="btn btn-secondary w-100">-</button>
-    </div>
-    <div class="col text-center">
-      {{ shoppingCart.getQuantity(product) }} in cart
+<div class="quantity-controls">
+  <div class="quantity-row">
+    <button
+      pButton
+      icon="pi pi-minus"
+      (click)="removeFromCart()"
+      class="p-button-rounded p-button-secondary "
+    ></button>
+   
+    <span class="quantity-label">
+      <strong>{{ shoppingCart.getQuantity(product) }}</strong>  in cart
+    </span>
+   
+    <button
+      pButton
+      icon="pi pi-plus"
+      (click)="addToCart()"
+      class="p-button-rounded p-button-secondary "
+    ></button>
   </div>
-  <div class="col-2">
-    <button 
-    (click)="addToCart()"
-    class="btn btn-secondary w-100">+</button>
-       </div>
-  </div>
+</div>

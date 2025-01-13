@@ -1,3 +1,10 @@
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -9,6 +16,18 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
+  animations: [
+    trigger('fadeInAnimation', [
+      state(
+        'void',
+        style({
+          opacity: 0,
+          transform: 'translateY(20px)',
+        })
+      ),
+      transition('void => *', [animate('300ms ease-out')]),
+    ]),
+  ],
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];

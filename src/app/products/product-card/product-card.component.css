@@ -1,25 +1,46 @@
-.card {
-  margin-bottom: 30px;
-  height: 100%;
+:host {
+  display: block;
+  margin-bottom: 1rem;
 }
 
-.card-img-top {
-  height: 200px;
+:host ::ng-deep .p-card {
+  transition: transform 0.5s;
+  width: 100%;
+  margin: 0 auto;
+}
+
+:host ::ng-deep .p-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+:host ::ng-deep img {
+  width: auto;
+  height: auto;
   object-fit: cover;
 }
 
-.card-footer {
-  padding: 0;
+:host ::ng-deep .p-button {
+  border-radius: 10px !important;
+  transition: background-color 0.2s;
 }
 
-.card-footer button {
-  cursor: pointer;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+:host ::ng-deep .p-button:hover {
+  transform: translateY(-2px);
 }
 
-/* For the quantity controls */
-.card-footer product-quantity .btn {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+.flex {
+  display: flex;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.w-full {
+  width: 100%;
 }

@@ -4,16 +4,21 @@
     <tr>
       <th>Customer</th>
       <th>Date</th>
-      <th></th>
+      <th colspan="2" class="text-center">Order Details</th>
     </tr>
-  </thead> 
+  </thead>
   <tbody>
     <tr *ngFor="let order of orders$ | async">
       <td>{{ order.shipping.name }}</td>
-      <td>{{ order.datePlaced | date}}</td>
-      <td>
-        <a href="#">View</a>
+      <td>{{ order.datePlaced | date }}</td>
+      <td colspan="2">
+        <div class="order-grid">
+          <div *ngFor="let item of order.items" class="order-row">
+            <div class="product-name">{{ item.product.title }}</div>
+            <div class="product-quantity">{{ item.quantity }}</div>
+          </div>
+        </div>
       </td>
     </tr>
-  </tbody> 
+  </tbody>
 </table>
