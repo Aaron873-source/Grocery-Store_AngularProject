@@ -37,12 +37,24 @@ export class ProductFormComponent implements OnDestroy {
         .subscribe((p) => (this.product = p as Product));
   }
 
-  save(product: Product) {
+  save(product: Product, form: any) {
+    if (!form.valid) return;
+
     if (this.id) this.productService.update(this.id, product);
     else this.productService.create(product);
 
-    //After saving the product, redirecting user to the products page
     this.router.navigate(['/admin/products']);
+  }
+
+  clearForm(form: any) {
+    this.product = {
+      $key: '',
+      title: '',
+      price: 0,
+      category: '',
+      imageUrl: '',
+    };
+    form.resetForm();
   }
 
   delete() {

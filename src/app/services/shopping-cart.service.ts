@@ -9,7 +9,28 @@ import { ShoppingCart } from '../models/shopping-cart';
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  constructor(private db: AngularFireDatabase) {}
+  private dbReady = false;
+
+  constructor(private db: AngularFireDatabase) {
+    // Check if Firebase is ready
+    this.db.database.ref('.info/connected').on('value', (snap) => {
+      this.dbReady = snap.val();
+    });
+  }
+
+  private async waitForDb(): Promise<void> {
+    if (this.dbReady) return;
+
+    return new Promise((resolve) => {
+      const callback = (snap: any) => {
+        if (snap.val()) {
+          this.db.database.ref('.info/connected').off('value', callback);
+          resolve();
+        }
+      };
+      this.db.database.ref('.info/connected').on('value', callback);
+    });
+  }
 
   private create() {
     return this.db.list('/shopping-carts').push({
@@ -51,6 +72,7 @@ export class ShoppingCartService {
   }
 
   async addToCart(product: Product) {
+    await this.waitForDb();
     this.updateItemQuantity(product, 1);
   }
 
