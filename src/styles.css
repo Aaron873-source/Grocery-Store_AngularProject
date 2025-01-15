@@ -8,6 +8,33 @@
   --text-color: #1e293b;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  position: relative;
+}
+
+/* Add a wrapper div in your app.component.html */
+.page-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/food-pattern.jpg") !important;
+  background-repeat: repeat !important;
+  background-size: 400px !important;
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -26,6 +53,3 @@
     width: 75%;
   }
 }
-
-
-
