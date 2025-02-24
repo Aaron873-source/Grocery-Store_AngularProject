@@ -1,34 +1,41 @@
 <div class="chat-bot-container" [class.open]="isOpen">
-    <!-- Chat Bot Icon Button -->
-    <button class="chat-bot-button" (click)="toggleChat()" *ngIf="!isOpen">
-      <i class="fas fa-comments"></i>
-    </button>
-  
-    <!-- Chat Window -->
-    <div class="chat-window" *ngIf="isOpen">
-      <div class="chat-header">
-        <h3>FAQ Assistant</h3>
-        <button class="close-button" (click)="toggleChat()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      
-      <div class="chat-messages" #chatMessages>
-        <div *ngFor="let message of messages" 
-             [ngClass]="{'bot-message': !message.isUser, 'user-message': message.isUser}"
-             class="message">
-          {{ message.text }}
-        </div>
-      </div>
-  
-      <div class="chat-input">
-        <input type="text" 
-               [(ngModel)]="userInput" 
-               (keyup.enter)="sendMessage()"
-               placeholder="Type your question...">
-        <button (click)="sendMessage()">
-          <i class="fas fa-paper-plane"></i>
-        </button>
+  <!-- Chat Bot Icon Button -->
+  <button class="chat-bot-button" (click)="toggleChat()" *ngIf="!isOpen">
+    <i class="fas fa-comments"></i>
+  </button>
+
+  <!-- Chat Window -->
+  <div class="chat-window" *ngIf="isOpen">
+    <div class="chat-header">
+      <h3>FAQ Assistant</h3>
+      <button class="close-button" (click)="toggleChat()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="chat-messages" #chatMessages>
+      <div
+        *ngFor="let message of messages"
+        [ngClass]="{
+          'bot-message': !message.isUser,
+          'user-message': message.isUser
+        }"
+        class="message"
+      >
+        {{ message.text }}
       </div>
     </div>
+
+    <div class="chat-input">
+      <input
+        type="text"
+        [(ngModel)]="userInput"
+        (keyup.enter)="sendMessage()"
+        placeholder="Type your question..."
+      />
+      <button (click)="sendMessage()">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
   </div>
+</div>
