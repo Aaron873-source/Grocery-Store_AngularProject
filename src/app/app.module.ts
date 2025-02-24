@@ -44,6 +44,7 @@ import { UserService } from './services/user.service';
 import { CustomPaginatorIntl } from './shared/custom-paginator';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ChatBotComponent } from './chat-bot/chat-bot.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     ProductCardComponent,
     ProductQuantityComponent,
     ShoppingCartSummaryComponent,
+    ChatBotComponent,
   ],
   imports: [
     BrowserModule,
